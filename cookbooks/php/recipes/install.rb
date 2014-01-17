@@ -35,26 +35,41 @@ template "/etc/php5/fpm/pool.d/www.conf.erb" do
   notifies :restart, resources(:service => "php5-fpm"), :immediately
 end
 
+# install composer
 cache_dir = "#{Chef::Config[:file_cache_path]}/composer"
-
 directory cache_dir do
   action :create
 end
-
 cache_file = "#{cache_dir}/composer.phar"
-
 remote_file cache_file do
   source node['php']['composer']['url']
   mode "0777"
   action :create
   not_if { ::File.exists?(cache_file) }
 end
-
 link node['php']['composer']['bin'] do
   to cache_file
   action :create
 end
 
+# install phpunit
+cache_dir = "#{Chef::Config[:file_cache_path]}/phpunit"
+directory cache_dir do
+  action :create
+end
+cache_file = "#{cache_dir}/phpunit.phar"
+remote_file cache_file do
+  source node['php']['phpunit']['url']
+  mode "0777"
+  action :create
+  not_if { ::File.exists?(cache_file) }
+end
+link node['php']['phpunit']['bin'] do
+  to cache_file
+  action :create
+end
+
+# configs php.ini
 ruby_block "edit fpm php.ini" do
   block do
     rc = Chef::Util::FileEdit.new("/etc/php5/fpm/php.ini")

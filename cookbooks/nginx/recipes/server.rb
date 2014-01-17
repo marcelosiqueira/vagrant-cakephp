@@ -64,6 +64,14 @@ template "/etc/nginx/php.conf" do
   notifies :restart, "service[nginx]"
 end
 
+template "/etc/nginx/phpmyadmin.conf" do
+  source "phpmyadmin.conf.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  notifies :restart, "service[nginx]"
+end
+
 template "/etc/nginx/cakephp.conf" do
   source "cakephp.conf.erb"
   owner "root"

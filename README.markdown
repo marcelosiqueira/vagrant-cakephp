@@ -69,16 +69,17 @@ Anything in `app/webroot/index.php` will be served up, and all other `index.php`
 ## CakePHP path
 
 
--Cakephp 1.3.17
+### Cakephp 1.3.17
 command line:
 
     /usr/share/php5/Cake1
 
--Cakephp 2.4.4
+### Cakephp 2.4.4
 command line:
 
     /usr/share/php5/Cake2
 
+Is not necessary to configure your app because the Cake1 and Cake2 are in include_path
 
 ## Starting/Stopping Work
 

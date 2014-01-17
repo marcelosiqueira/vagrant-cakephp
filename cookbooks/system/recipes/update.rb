@@ -1,4 +1,4 @@
-include_recipe "redis::apt_repository"
+include_recipe "nginx::apt_repository"
 include_recipe "percona::apt_repository"
 include_recipe "php::apt_repository"
 
@@ -17,6 +17,10 @@ package "curl" do
 	action :install
 end
 
+package "vim" do
+    action :install
+end
+
 package "aptitude" do
 	action :install
 end
@@ -27,4 +31,8 @@ end
 
 package "subversion" do
 	action :install
+end
+
+package "phpmyadmin" do
+    action :install
 end

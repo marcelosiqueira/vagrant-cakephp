@@ -1,13 +1,26 @@
 server {
-	listen 80;
-	server_name <%= @server_name %>;
-	root /vagrant/app/app/webroot;
-	access_log /var/log/nginx/<%= @server_name %>-access.log;
-	include common.conf;
-	include cakephp.conf;
-}
-server {
-	listen 80;
-	server_name www.<%= @server_name %>;
-	rewrite ^ http://<%= @server_name %>$uri permanent;
+    listen 80;
+    server_name <%= @server_name %>;
+    root /vagrant/app/app/webroot;
+    access_log /var/log/nginx/<%= @server_name %>-access.log;
+    include common.conf;
+    include cakephp.conf;
+
+    # enable global phpMyAdmin
+    location /phpmyadmin {
+        root /usr/share/;
+        index index.php;
+        location ~ ^/phpmyadmin/(.+\.php)$ {
+            try_files $uri =404;
+            root /usr/share/;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            include fastcgi_params;
+        }
+        location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+            root /usr/share/;
+        }
+    }
+    location /phpMyAdmin {
+        rewrite ^/* /phpmyadmin last;
+    }
 }

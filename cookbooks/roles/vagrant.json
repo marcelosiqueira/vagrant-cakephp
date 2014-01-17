@@ -21,8 +21,6 @@
     "recipe[system::update]",
     "recipe[hostname::default]",
     "recipe[percona::install]",
-    "recipe[postgresql::install]",
-    "recipe[redis::install]",
     "recipe[memcached::install]",
     "recipe[nginx::server]",
     "recipe[php::install]",

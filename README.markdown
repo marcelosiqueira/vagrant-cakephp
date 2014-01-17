@@ -9,6 +9,7 @@ Vagrant Chef creates a Vagrant installation for CakePHP using Chef with the foll
 - Memcached 1.4
 - Git 1.7
 - Composer
+- CakePHP 1.3.17
 - CakePHP 2.4.4
 - phpMyAdmin
 
@@ -65,10 +66,18 @@ When you want to use vagrant instance for a development environment, you can rep
 
 Anything in `app/webroot/index.php` will be served up, and all other `index.php` files ignored.
 
+## CakePHP path
+
+
+-Cakephp 1.3.17
 command line:
 
-    define('CAKE_CORE_INCLUDE_PATH',  DS . 'var' . DS . 'virtual' . DS . 'cakephp-2.4.4' . DS . 'lib');
+    /usr/share/php5/Cake1
 
+-Cakephp 2.4.4
+command line:
+
+    /usr/share/php5/Cake2
 
 
 ## Starting/Stopping Work

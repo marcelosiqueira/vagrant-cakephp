@@ -54,3 +54,18 @@ link node['php']['composer']['bin'] do
   to cache_file
   action :create
 end
+
+ruby_block "edit fpm php.ini" do
+  block do
+    rc = Chef::Util::FileEdit.new("/etc/php5/fpm/php.ini")
+    rc.search_file_replace_line(";date.timezone =", "date.timezone = 'America/Campo_Grande'")
+    rc.search_file_replace_line("memory_limit = 128M", "memory_limit = 512M")
+    rc.search_file_replace_line("post_max_size = 8M", "post_max_size = 32M")
+    rc.search_file_replace_line("upload_max_filesize = 2M", "upload_max_filesize = 200M")
+    rc.search_file_replace_line("max_execution_time = 30", "max_execution_time = 180")
+    rc.search_file_replace_line("max_input_time = 60", "max_input_time = 120")
+    rc.search_file_replace_line("error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT", "error_reporting = E_ALL")
+    rc.search_file_replace_line(";include_path = \".:/usr/share/php\"", "include_path = \".:/usr/share/php5:/usr/share/php5/PEAR:/usr/share/php5/Cake2/lib:/usr/share/php5/Cake1/\"")
+    rc.write_file
+  end
+end

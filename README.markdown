@@ -65,6 +65,12 @@ When you want to use vagrant instance for a development environment, you can rep
 
 Anything in `app/webroot/index.php` will be served up, and all other `index.php` files ignored.
 
+command line:
+
+    define('CAKE_CORE_INCLUDE_PATH',  DS . 'var' . DS . 'virtual' . DS . 'cakephp-2.4.4' . DS . 'lib');
+
+
+
 ## Starting/Stopping Work
 
 You normally wont want to have the instance running full time. To pause it, simply perform the following in the command line:
@@ -109,7 +115,7 @@ Jose Diaz-Gonzalez
 
 ## MIT
 
-Copyright (c) 2012 Marcelo Siqueira
+Copyright (c) 2014 Marcelo Siqueira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
